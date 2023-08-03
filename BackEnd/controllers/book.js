@@ -89,7 +89,6 @@ exports.modifyBookRating = (req, res, next) => {
         .then((book) => {
             const ratings = book.ratings;
             let averageRating = book.averageRating;
-            const userIndex = ratings.findIndex(userRating => userRating.userId === userId);
            
             ratings.push({userId: userId, grade: newRating});
             averageRating += ((newRating - averageRating) / ratings.length);
@@ -120,7 +119,7 @@ exports.modifyBookRating = (req, res, next) => {
             }
         })
         .catch( error => {
-            res.status(500).json({ error });
+            res.status(501).json({ error });
         });
  };
 
